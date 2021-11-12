@@ -20,6 +20,11 @@ private:
 	Font* fuente;
 	Text vectorBotones[Max_menu];
 
+	Vector2i posicionM;
+
+	Texture* Tnodo;
+	Sprite* Snodo;
+
 	SoundBuffer buffer;
 	Sound click;
 public:
@@ -28,4 +33,5 @@ public:
 	void gameloop();
 	void dibujar();
 	void ejecutarEventos();
+	void posicionMouse();
 };

@@ -20,6 +20,8 @@ PantallaMapa::PantallaMapa(int ancho, int alto, string titulo)
 	fuente = new Font();
 	fuente->loadFromFile("fonts/PressStart2P-Regular.ttf");
 
+	
+
 	evento = new Event;
 	gameloop();
 }
@@ -28,6 +30,7 @@ void PantallaMapa::gameloop()
 {
 	while (PantallaPrincipal->isOpen())
 	{
+		posicionMouse();
 		ejecutarEventos();
 		dibujar();
 	}
@@ -37,6 +40,7 @@ void PantallaMapa::dibujar()
 {
 	PantallaPrincipal->clear();
 	PantallaPrincipal->draw(*basePantalla);
+	//PantallaPrincipal->draw(*Snodo);
 	PantallaPrincipal->display();
 }
 
@@ -62,5 +66,36 @@ void PantallaMapa::ejecutarEventos()
 				break;
 			}
 		}
+		if (evento->type == Event::MouseButtonPressed) 
+		{
+			if (Mouse::isButtonPressed(Mouse::Left)) {
+				PantallaPrincipal->clear();
+				texturaFondo->loadFromFile("resource/mapa.jpg");
+				basePantalla->setTexture(*texturaFondo);
+				basePantalla->setScale(((float)PantallaPrincipal->getSize().x / basePantalla->getTexture()->getSize().x), ((float)PantallaPrincipal->getSize().y / basePantalla->getTexture()->getSize().y));
+				PantallaPrincipal->draw(*basePantalla);
+
+				Tnodo = new Texture();
+				Snodo = new Sprite;
+
+				Tnodo->loadFromFile("resource/nodo1.png");
+				Snodo->setTexture(*Tnodo);
+
+				Snodo->setPosition(Vector2f(posicionM));
+				Snodo->setScale(100.f / Snodo->getTexture()->getSize().x, 100.f / Snodo->getTexture()->getSize().y);
+
+				PantallaPrincipal->draw(*Snodo);
+				PantallaPrincipal->display();
+
+				cout << posicionM.x << endl;
+				cout << posicionM.y << endl;
+			}
+		}
 	}
+}
+
+void PantallaMapa::posicionMouse() 
+{
+	posicionM = Mouse::getPosition(*PantallaPrincipal);
+	posicionM = (Vector2i)PantallaPrincipal->mapPixelToCoords(posicionM);
 }
