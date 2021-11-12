@@ -3,6 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 #include <iostream>
+#include "PantallaMapa.h"
 
 using namespace sf;
 using namespace std;
@@ -22,6 +23,8 @@ private:
 
 	Font* fuente;
 	Text vectorBotones[Max_menu];
+
+	PantallaMapa* Mapa;
 
 	SoundBuffer buffer;
 	Sound click;

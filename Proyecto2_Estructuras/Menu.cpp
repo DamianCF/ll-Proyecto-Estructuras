@@ -114,22 +114,28 @@ void Menu::ejecutarEventos()
 				int x = MenuPressed();
 				if (x == 0)//ingresa a la pantalla de juego
 				{
+					cout << x;
 					menuPrincipal->close();
+					Mapa = new PantallaMapa(816, 1024, "Mapa");
 				}
 				if (x == 1)// ingresa a la pantalla de opciones
 				{
+					cout << x;
 					menuPrincipal->close();
 				}
 				if (x == 2)
 				{
+					cout << x;
 					menuPrincipal->close();
 				}
 				if (x == 3)
 				{
+					cout << x;
 					menuPrincipal->close();
 				}
 				if (x == 4)
 				{
+					cout << x;
 					menuPrincipal->close();
 					exit(1);
 				}
