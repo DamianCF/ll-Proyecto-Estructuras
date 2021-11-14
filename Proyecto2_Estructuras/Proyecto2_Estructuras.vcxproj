@@ -142,11 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Grafo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PantallaMapa.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Grafo.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PantallaMapa.h" />
   </ItemGroup>
