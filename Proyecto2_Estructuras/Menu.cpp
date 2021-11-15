@@ -116,7 +116,7 @@ void Menu::ejecutarEventos()
 				{
 					cout << x;
 					menuPrincipal->close();
-					Mapa = new PantallaMapa(816, 1024, "Mapa");
+					Mapa = new PantallaMapa(1550, 1000, "Mapa");
 				}
 				if (x == 1)// ingresa a la pantalla de opciones
 				{
