@@ -37,6 +37,7 @@ public:
 	void setAristaSIG(Grafo*);
 	void setPeso(int);
 	void setRaiz(Grafo*);
+	void sumaNombre();
 
 	char getNombreNodo();
 	Grafo* getSigNodo();

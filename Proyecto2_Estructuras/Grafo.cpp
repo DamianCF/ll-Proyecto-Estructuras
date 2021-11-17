@@ -1,7 +1,7 @@
 #include"Grafo.h"
 
 Grafo::Grafo() {
-  // nombreNodo=' ';
+   nombreNodo=65;
    siguienteNodo = NULL;
    nodoDestino = NULL;
    aristaADY = NULL;
@@ -67,16 +67,12 @@ void Grafo::insertarNodo(Grafo* raiz)
     Grafo* t;
     Grafo* nuevo = new Grafo();
 
-    char name;
-    cout << "INGRESE VARIABLE:";
-    cin >> name;
-    nuevo->setNombreNodo(name);
-
     nuevo->setSigNodo(NULL);
     nuevo->setAristaADY(NULL);
 
     if (raiz == NULL)
     {
+        nuevo->setNombreNodo(getNombreNodo());
         setRaiz(nuevo);
         cout << "PRIMER NODO...!!!";
     }
@@ -88,6 +84,7 @@ void Grafo::insertarNodo(Grafo* raiz)
             t = t->getSigNodo();
         }
         t->setSigNodo(nuevo);
+        nuevo->setNombreNodo(t->getNombreNodo() + 1);
         cout << "NODO INGRESADO...!!!";
     }
 }
@@ -212,6 +209,10 @@ void Grafo::setPeso(int peso) {
 
 void Grafo::setRaiz(Grafo* raiz) {
     this->raiz = raiz;
+}
+
+void Grafo::sumaNombre() {
+    this->nombreNodo = nombreNodo + 1;
 }
 
 char Grafo::getNombreNodo() {
