@@ -27,7 +27,9 @@ PantallaMapa::PantallaMapa(int ancho, int alto, string titulo)
 	mensaje.setCharacterSize(20);
 	mensaje.setFillColor(Color::Black);
 	mensaje.setString("Dijite la cantidad de vertices ");
-	mensaje.setPosition(Vector2f(71, 912));
+	mensaje.setPosition(Vector2f(71, 12));
+
+	cont = 0;
 
 	evento = new Event;
 	gameloop();
@@ -35,7 +37,7 @@ PantallaMapa::PantallaMapa(int ancho, int alto, string titulo)
 
 void PantallaMapa::gameloop()
 {
-	grafo->iniciar(5);
+	//grafo->iniciar(5);
 	PantallaPrincipal->draw(*basePantalla);
 	PantallaPrincipal->draw(mensaje);
 	PantallaPrincipal->display();
@@ -91,9 +93,17 @@ void PantallaMapa::ejecutarEventos()
 		}
 
 		if (evento->type == sf::Event::EventType::TextEntered) {//este evento capta las teclas que se presionan
-			if (std::isprint(evento->text.unicode))
-				input_text += evento->text.unicode;
+			//int cont=0;
+			if (cont == 0) {
+				cont += 1;
+				if (std::isprint(evento->text.unicode)) {
+					input_text += evento->text.unicode;
+					tamano = atoi(input_text.c_str());
+					grafo->iniciar(tamano);
+				}
+			}
 			cout << input_text;
+			cout << tamano;
 		}
 
 		if (evento->type == Event::MouseButtonPressed and Mouse::isButtonPressed(Mouse::Left))

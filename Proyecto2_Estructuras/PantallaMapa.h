@@ -34,6 +34,9 @@ private:
 	Grafo* grafo;
 	Grafo* g;
 
+	int tamano;
+	int cont;
+
 public:
 	PantallaMapa(int ancho, int alto, string titulo);
 	~PantallaMapa();
