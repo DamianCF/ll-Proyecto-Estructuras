@@ -71,6 +71,7 @@ public:
 	int getPeso();
 	int getCoorx();
 	int getCoory();
+	int* getLista();
 	Grafo* getRaiz();
 
 };

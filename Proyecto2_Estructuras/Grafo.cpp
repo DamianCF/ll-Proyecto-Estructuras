@@ -69,15 +69,6 @@ void Grafo::iniciar(int t) {
             let[i][j] = j;
         }
     }
-
-    for (int i = 0; i < t; i++) { //imprime la letra de la columna
-
-        for (int j = 0; j < t; j++) {
-            cout.width(10);
-            cout << letra[let[i][j]];
-        }
-        cout << endl;
-    }
          
 }
 
@@ -545,13 +536,9 @@ void Grafo::recorrido(int ini, int fin, int x)
                 for (int i = 0; i < 5; i++) {
                     listamayor[i] = -1;
                 }
-                //cout<<endl;
                 for (int i = 0; i < contp; i++) {
                     listamayor[i] = lista[i];
-                    //cout<<letra[listamayor[i]];
-                    //cout<<listamayor[i];
                 }
-                //cout<<suma;
             }
         }
         else
@@ -569,7 +556,7 @@ void Grafo::recorrido(int ini, int fin, int x)
 
 void Grafo::dijkstra(int ini, int fin, int x) {
     recorrido(ini, fin, x);
-    cout << endl << listamayor[1] << endl;
+    //cout << endl << listamayor[1] << endl;
     for (int i = 0; i < 5; i++) {
         if (listamayor[i] >= 0) {
             cout << letra[listamayor[i]]<<"->";
@@ -651,6 +638,10 @@ int Grafo::getCoorx() {
 
 int Grafo::getCoory() {
     return coordenaday;
+}
+
+int* Grafo::getLista() {
+    return listamayor;
 }
 
 Grafo* Grafo::getRaiz() {

@@ -88,6 +88,43 @@ void PantallaMapa::ejecutarEventos()
 			if (evento->key.code == Keyboard::M)
 			{
 				grafo->mostrarGrafo();
+				int* lista = new int[5];
+
+				lista = grafo->getLista();
+
+				for (int i = 0; i < 5; i++) {
+					if (lista[i] >= 0) {
+						if (lista[i] == 0)
+						{
+							cout << 'A' << "->";
+							ver2('A');
+							
+						}
+						if (lista[i] == 1)
+						{
+							cout << 'B' << "->";
+							ver2('B');
+							
+						}
+						if (lista[i] == 2)
+						{
+							cout << 'C' << "->";
+							ver2('C');
+							
+						}
+						if (lista[i] == 3)
+						{
+							cout << 'D' << "->";
+							ver2('D');
+						}
+						if (lista[i] == 4)
+						{
+							cout << 'E' << "->";
+							ver2('E');
+						}
+					}
+				}
+				PantallaPrincipal->display();
 				break;
 			}
 		}
@@ -137,7 +174,7 @@ void PantallaMapa::ejecutarEventos()
 				//Dijkstra
 				if ((posicionM.x>1150 and posicionM.x <1400) and (posicionM.y>540 and posicionM.y<610)) {
 					cout << "Dijkstra"<<endl;
-					grafo->dijkstra(0, 4, 0);
+					grafo->dijkstra(0, 3, 0);
 				}
 
 				//Warshall
@@ -228,6 +265,72 @@ void PantallaMapa::ver()
 		etiq.setCharacterSize(15);
 		etiq.setPosition(Vector2f(x-1, y-2));
 		PantallaPrincipal->draw(etiq);
+
+		g = g->getSigNodo();
+	}
+}
+
+void PantallaMapa::ver2(char nom)
+{
+	g = grafo->getRaiz();
+	
+	sf::Text etiq;
+	sf::Text peso;
+	sf::Font Fuente;
+
+	Fuente.loadFromFile("fonts/PressStart2P-Regular.ttf");
+
+	int x;
+	int y;
+
+	int xx;
+	int yy;
+
+	while (g != NULL )
+	{
+		x = g->getCoorx();
+		y = g->getCoory();
+
+
+		if (g->getNombreNodo() == nom) {
+			sf::CircleShape circulo(20);
+			circulo.setFillColor(sf::Color::Red);
+			circulo.setPosition(x - 15, y - 15);
+			PantallaPrincipal->draw(circulo);
+
+			etiq.setString(g->getNombreNodo());
+			etiq.setFont(Fuente);
+			etiq.setCharacterSize(15);
+			etiq.setPosition(Vector2f(x - 1, y - 2));
+			PantallaPrincipal->draw(etiq);
+		}
+		
+
+		
+
+		if (g->getSigNodo() != NULL) {
+			xx = g->getSigNodo()->getCoorx();
+			yy = g->getSigNodo()->getCoory();
+
+			int p = g->getAristaADY()->getPeso();
+
+			//string num_cstr(STRING(p));
+			string num_str1(std::to_string(p));
+
+			peso.setString(num_str1);
+			peso.setFont(Fuente);
+			peso.setCharacterSize(15);
+			peso.setPosition(Vector2f((x + xx) / 2, ((y + yy) / 2) + 10));
+			PantallaPrincipal->draw(peso);
+
+			//prueba para crear una linea
+			sf::Vertex line[] =
+			{
+				sf::Vertex(sf::Vector2f(x, y)),
+				sf::Vertex(sf::Vector2f(xx, yy))
+			}; PantallaPrincipal->draw(line, 2, sf::Lines);
+		}
+
 
 		g = g->getSigNodo();
 	}

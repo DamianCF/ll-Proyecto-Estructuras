@@ -43,6 +43,7 @@ public:
 	void gameloop();
 	void dibujar();
 	void ver();
+	void ver2(char);
 	void ejecutarEventos();
 	void posicionMouse();
 };
