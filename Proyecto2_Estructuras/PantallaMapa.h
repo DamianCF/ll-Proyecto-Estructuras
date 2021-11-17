@@ -3,6 +3,7 @@
 #include "SFML/Audio.hpp"
 #include <iostream>
 #include <locale> 
+#include "Grafo.h"
 
 using namespace sf;
 using namespace std;
@@ -23,16 +24,18 @@ private:
 
 	Vector2i posicionM;
 
-	Texture* Tnodo;
-	Sprite* Snodo;
-
 	SoundBuffer buffer;
 	Sound click;
+
+	Grafo* grafo;
+	Grafo* g;
+
 public:
 	PantallaMapa(int ancho, int alto, string titulo);
 	~PantallaMapa();
 	void gameloop();
 	void dibujar();
+	void ver();
 	void ejecutarEventos();
 	void posicionMouse();
 };

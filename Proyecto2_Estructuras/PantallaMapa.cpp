@@ -3,7 +3,7 @@
 
 PantallaMapa::~PantallaMapa()
 {
-
+	
 }
 
 PantallaMapa::PantallaMapa(int ancho, int alto, string titulo)
@@ -20,7 +20,8 @@ PantallaMapa::PantallaMapa(int ancho, int alto, string titulo)
 
 	fuente = new Font();
 	fuente->loadFromFile("fonts/PressStart2P-Regular.ttf");
-
+	
+	grafo = new Grafo();
 	
 
 	evento = new Event;
@@ -29,6 +30,7 @@ PantallaMapa::PantallaMapa(int ancho, int alto, string titulo)
 
 void PantallaMapa::gameloop()
 {
+	grafo->iniciar(5);
 	PantallaPrincipal->draw(*basePantalla);
 	PantallaPrincipal->display();
 
@@ -36,7 +38,7 @@ void PantallaMapa::gameloop()
 	{
 		posicionMouse();
 		ejecutarEventos();
-		//dibujar();
+		
 	}
 
 }
@@ -75,6 +77,11 @@ void PantallaMapa::ejecutarEventos()
 				cout << evento->key.code;
 				break;
 			}
+			if (evento->key.code == Keyboard::M)
+			{
+				grafo->mostrarGrafo();
+				break;
+			}
 		}
 
 		if (evento->type == sf::Event::EventType::TextEntered) {//este evento capta las teclas que se presionan
@@ -92,8 +99,12 @@ void PantallaMapa::ejecutarEventos()
 					cout << posicionM.x << endl;
 					cout << posicionM.y << endl;
 
-					circulo.setPosition((posicionM.x) - 15, (posicionM.y) - 15);
-					PantallaPrincipal->draw(circulo);
+					
+					grafo->insertarNodo(posicionM.x, posicionM.y);
+					//circulo.setPosition((posicionM.x) - 15, (posicionM.y) - 15);
+					//PantallaPrincipal->draw(circulo);
+					ver();
+					
 					//prueba para crear una linea
 					sf::Vertex line[] =
 					{
@@ -153,4 +164,23 @@ void PantallaMapa::posicionMouse()
 {
 	posicionM = Mouse::getPosition(*PantallaPrincipal);
 	posicionM = (Vector2i)PantallaPrincipal->mapPixelToCoords(posicionM);
+}
+
+void PantallaMapa::ver()
+{
+	g = grafo->getRaiz();
+	sf::CircleShape circulo(20);
+	circulo.setFillColor(sf::Color::Black);
+
+	int x;
+	int y;
+
+	while (g != NULL)
+	{
+		x = g->getCoorx();
+		y = g->getCoory();
+		circulo.setPosition(x - 15 ,y - 15 );
+		PantallaPrincipal->draw(circulo);
+		g = g->getSigNodo();
+	}
 }

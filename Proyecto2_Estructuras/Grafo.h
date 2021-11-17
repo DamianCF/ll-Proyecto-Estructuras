@@ -16,6 +16,10 @@ private:
 	Grafo* nodoDestino;
 	Grafo* aristaADY;
 	Grafo* aristaSIG;
+
+	int coordenadax;
+	int coordenaday;
+
 	int peso;
 
 	Grafo* raiz;
@@ -24,11 +28,14 @@ public:
 	Grafo();
 	Grafo(int);
 	void inicio(int);
+	void iniciar(int);
 	void menu();
-	void insertarNodo(Grafo*);
+	void insertarNodo(int,int);
 	void agregaArista(Grafo*&, Grafo*&,int, Grafo*&);
-	void mostrarGrafo(int**);
-	void insertarArista(int**);
+	void mostrarGrafo();
+	void insertarArista();
+	void insertarArista(Grafo*, Grafo*);
+
 	/*void vaciarAristas(Grafo&);
 	void eliminarNodo();
 	void eliminarArista();
@@ -40,6 +47,8 @@ public:
 	void setAristaADY(Grafo*);
 	void setAristaSIG(Grafo*);
 	void setPeso(int);
+	void setCoorx(int);
+	void setCoory(int);
 	void setRaiz(Grafo*);
 	void sumaNombre();
 
@@ -49,6 +58,8 @@ public:
 	Grafo* getAristaADY();
 	Grafo* getAristaSIG();
 	int getPeso();
+	int getCoorx();
+	int getCoory();
 	Grafo* getRaiz();
 
 };

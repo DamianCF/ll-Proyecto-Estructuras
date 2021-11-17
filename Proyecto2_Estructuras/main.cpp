@@ -10,10 +10,10 @@ using namespace std;
 
 int main(int argc, char* args[])
 {
-	//Menu* partida;
-	//partida = new Menu(960, 540, "SOKOBAN");
-	Grafo* x = new Grafo();
-	x->inicio(5);
+	Menu* partida;
+	partida = new Menu(960, 540, "SOKOBAN");
+	//Grafo* x = new Grafo();
+	//x->inicio(5);
 
 	return 0;
 }

@@ -18,6 +18,8 @@ Grafo::Grafo() {
    aristaADY = NULL;
    aristaSIG = NULL;
    peso = 0;
+   coordenadax = 0;
+   coordenaday = 0;
    raiz = NULL;
 
    letra = new char[10];
@@ -35,9 +37,46 @@ Grafo::Grafo() {
 }
 
 
+void Grafo::iniciar(int t) {
+
+    let = new int* [t];
+
+    mat = new int* [t];
+
+    for (int i = 0; i < t; i++) {  // Inicializa la matriz de adyacencia
+        mat[i] = new int[t];
+    }
+
+    for (int i = 0; i < t; i++) { // Inicializa la matriz de recorrido
+        let[i] = new int[t];
+    }
+
+    for (int i = 0; i < t; i++) {  // Llena la matriz de adyacencia con el valor de INT_MIN
+        for (int j = 0; j < t; j++) {
+            mat[i][j] = INT_MIN;
+        }
+    }
+
+    for (int i = 0; i < t; i++) {  // Llena la matriz de recorrido con el valor de su columna
+        for (int j = 0; j < t; j++) {
+            let[i][j] = j;
+        }
+    }
+
+    for (int i = 0; i < t; i++) { //imprime la letra de la columna
+
+        for (int j = 0; j < t; j++) {
+            cout.width(10);
+            cout << letra[let[i][j]];
+        }
+        cout << endl;
+    }
+         
+}
+
+
 void Grafo::inicio(int t) {
 
-   
     let = new int*[t];
     
     mat = new int* [t];
@@ -82,15 +121,15 @@ void Grafo::inicio(int t) {
 
         switch (opcion){
         case 1:
-            insertarNodo(getRaiz());
+            insertarNodo(300,400);
             break;
-        case 2: insertarArista(mat);
+        case 2: insertarArista();
             break;
         /*case 3: eliminar_nodo();
             break;
         case 4: eliminar_arista();
             break;*/
-        case 5: mostrarGrafo(mat);
+        case 5: mostrarGrafo();
             break;
        /* case 6: mostrar_aristas();
             break;*/
@@ -120,8 +159,9 @@ void Grafo::menu(){
 }
 
 
-void Grafo::insertarNodo(Grafo* raiz)
+void Grafo::insertarNodo(int x, int y)
 {
+    Grafo* raiz = getRaiz();
     Grafo* t;
     Grafo* nuevo = new Grafo();
 
@@ -131,6 +171,8 @@ void Grafo::insertarNodo(Grafo* raiz)
     if (raiz == NULL)
     {
         nuevo->setNombreNodo(getNombreNodo());
+        nuevo->setCoorx(x);
+        nuevo->setCoory(y);
         setRaiz(nuevo);
         cout << "PRIMER NODO...!!!";
     }
@@ -141,9 +183,12 @@ void Grafo::insertarNodo(Grafo* raiz)
         {
             t = t->getSigNodo();
         }
-        t->setSigNodo(nuevo);
         nuevo->setNombreNodo(t->getNombreNodo() + 1);
+        nuevo->setCoorx(x);
+        nuevo->setCoory(y);
+        t->setSigNodo(nuevo);
         cout << "NODO INGRESADO...!!!";
+        insertarArista(t, nuevo);
     }
 }
 
@@ -170,7 +215,7 @@ void Grafo::agregaArista(Grafo*& aux, Grafo*& aux2, int peso, Grafo*& nuevo)
 
 }
 
-void Grafo::insertarArista(int** mat){
+void Grafo::insertarArista(){
     char ini, fin;
     int peso,i=0,j=0;
 
@@ -297,7 +342,113 @@ void Grafo::insertarArista(int** mat){
     }
 }
 
-void Grafo::mostrarGrafo(int** mat){
+void Grafo::insertarArista(Grafo* ant, Grafo* nuevoN) {
+    int peso, i = 0, j = 0;
+
+    Grafo* nuevo = new Grafo();
+    Grafo* aux, * aux2;
+
+    if (getRaiz() == NULL)
+    {
+        cout << "GRAFO VACIO...!!!!";
+        return;
+    }
+
+    
+    nuevo->setAristaSIG(NULL);
+  
+    peso = 2;
+
+    if (ant->getNombreNodo() == 'A')
+    {
+        i = 0;
+    }
+    else
+    {
+        if (ant->getNombreNodo() == 'B')
+        {
+            i = 1;
+        }
+        else
+        {
+            if (ant->getNombreNodo() == 'C')
+            {
+                i = 2;
+            }
+            else
+            {
+                if (ant->getNombreNodo() == 'D')
+                {
+                    i = 3;
+                }
+                else
+                {
+                    if (ant->getNombreNodo() == 'E')
+                    {
+                        i = 4;
+                    }
+                    else
+                    {
+                        if (ant->getNombreNodo() == 'F')
+                        {
+                            i = 5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (nuevoN->getNombreNodo() == 'A')
+    {
+        j = 0;
+    }
+    else
+    {
+        if (nuevoN->getNombreNodo() == 'B')
+        {
+            j = 1;
+        }
+        else
+        {
+            if (nuevoN->getNombreNodo() == 'C')
+            {
+                j = 2;
+            }
+            else
+            {
+                if (nuevoN->getNombreNodo() == 'D')
+                {
+                    j = 3;
+                }
+                else
+                {
+                    if (nuevoN->getNombreNodo() == 'E')
+                    {
+                        j = 4;
+                    }
+                    else
+                    {
+                        if (nuevoN->getNombreNodo() == 'F')
+                        {
+                            j = 5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    mat[i][j] = peso;
+
+    aux = ant;
+    aux2 = nuevoN;
+
+    agregaArista(aux, aux2, peso, nuevo);
+    
+}
+
+void Grafo::mostrarGrafo(){
 
     cout << endl;
     cout << "  ";
@@ -379,6 +530,14 @@ void Grafo::setPeso(int peso) {
     this->peso = peso;
 }
 
+void Grafo::setCoorx(int x) {
+    this->coordenadax = x;
+}
+
+void Grafo::setCoory(int y) {
+    this->coordenaday = y;
+}
+
 void Grafo::setRaiz(Grafo* raiz) {
     this->raiz = raiz;
 }
@@ -409,6 +568,14 @@ Grafo* Grafo::getAristaSIG() {
 
 int Grafo::getPeso() {
     return peso;
+}
+
+int Grafo::getCoorx() {
+    return coordenadax;
+}
+
+int Grafo::getCoory() {
+    return coordenaday;
 }
 
 Grafo* Grafo::getRaiz() {
