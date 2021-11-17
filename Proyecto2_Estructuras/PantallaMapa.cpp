@@ -45,13 +45,14 @@ void PantallaMapa::dibujar()
 {
 	PantallaPrincipal->clear();
 	PantallaPrincipal->draw(*basePantalla);
-	//PantallaPrincipal->draw(*Snodo);
 	PantallaPrincipal->display();
 }
 
 void PantallaMapa::ejecutarEventos()
 {
 	std::string input_text;
+	sf::CircleShape circulo(20);
+	circulo.setFillColor(sf::Color::Black);
 
 	while (PantallaPrincipal->pollEvent(*evento))
 	{
@@ -87,19 +88,12 @@ void PantallaMapa::ejecutarEventos()
 			//creacion de nodos dentro del los mapa
 			if (posicionM.x < 1010) {
 
-					Tnodo = new Texture();
-					Snodo = new Sprite;
-
-					Tnodo->loadFromFile("resource/nodo1.png");
-					Snodo->setTexture(*Tnodo);
-
-					Snodo->setPosition(Vector2f(posicionM));
-
-					PantallaPrincipal->draw(*Snodo);//se dibuja el nodo en pantalla
-
+				
 					cout << posicionM.x << endl;
 					cout << posicionM.y << endl;
 
+					circulo.setPosition((posicionM.x) - 15, (posicionM.y) - 15);
+					PantallaPrincipal->draw(circulo);
 					//prueba para crear una linea
 					sf::Vertex line[] =
 					{
@@ -107,6 +101,7 @@ void PantallaMapa::ejecutarEventos()
 						sf::Vertex(sf::Vector2f(posicionM.x, posicionM.y))
 					}; PantallaPrincipal->draw(line, 2, sf::Lines);
 
+				PantallaPrincipal->display();//mostramos los cambios del evento
 			}
 
 			//control de botones
@@ -150,8 +145,6 @@ void PantallaMapa::ejecutarEventos()
 				}
 
 			}
-
-			PantallaPrincipal->display();//mostramos los cambios del evento
 		}
 	}
 }
