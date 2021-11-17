@@ -88,43 +88,6 @@ void PantallaMapa::ejecutarEventos()
 			if (evento->key.code == Keyboard::M)
 			{
 				grafo->mostrarGrafo();
-				int* lista = new int[5];
-
-				lista = grafo->getLista();
-
-				for (int i = 0; i < 5; i++) {
-					if (lista[i] >= 0) {
-						if (lista[i] == 0)
-						{
-							cout << 'A' << "->";
-							ver2('A');
-							
-						}
-						if (lista[i] == 1)
-						{
-							cout << 'B' << "->";
-							ver2('B');
-							
-						}
-						if (lista[i] == 2)
-						{
-							cout << 'C' << "->";
-							ver2('C');
-							
-						}
-						if (lista[i] == 3)
-						{
-							cout << 'D' << "->";
-							ver2('D');
-						}
-						if (lista[i] == 4)
-						{
-							cout << 'E' << "->";
-							ver2('E');
-						}
-					}
-				}
-				PantallaPrincipal->display();
 				break;
 			}
 		}
@@ -175,6 +138,43 @@ void PantallaMapa::ejecutarEventos()
 				if ((posicionM.x>1150 and posicionM.x <1400) and (posicionM.y>540 and posicionM.y<610)) {
 					cout << "Dijkstra"<<endl;
 					grafo->dijkstra(0, 3, 0);
+					int* lista = new int[5];
+
+					lista = grafo->getLista();
+
+					for (int i = 0; i < 5; i++) {
+						if (lista[i] >= 0) {
+							if (lista[i] == 0)
+							{
+								cout << 'A' << "->";
+								ver2('A');
+
+							}
+							if (lista[i] == 1)
+							{
+								cout << 'B' << "->";
+								ver2('B');
+
+							}
+							if (lista[i] == 2)
+							{
+								cout << 'C' << "->";
+								ver2('C');
+
+							}
+							if (lista[i] == 3)
+							{
+								cout << 'D' << "->";
+								ver2('D');
+							}
+							if (lista[i] == 4)
+							{
+								cout << 'E' << "->";
+								ver2('E');
+							}
+						}
+					}
+					PantallaPrincipal->display();
 				}
 
 				//Warshall
@@ -196,7 +196,7 @@ void PantallaMapa::ejecutarEventos()
 				if ((posicionM.x > 1069 and posicionM.x < 1500) and (posicionM.y > 910 and posicionM.y < 985)) {
 					PantallaPrincipal->close();
 					Menu* partida;
-					partida = new Menu(960, 540, "SOKOBAN");
+					partida = new Menu(960, 540, "MAPA");
 					cout << "Menu" << endl;
 				}
 
