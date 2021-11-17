@@ -24,6 +24,8 @@ private:
 	Font* fuente;
 	Text vectorBotones[Max_menu];
 
+	Text mensaje;
+
 	Vector2i posicionM;
 
 	SoundBuffer buffer;

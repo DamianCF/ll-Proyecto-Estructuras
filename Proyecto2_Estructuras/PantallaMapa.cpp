@@ -23,6 +23,11 @@ PantallaMapa::PantallaMapa(int ancho, int alto, string titulo)
 	
 	grafo = new Grafo();
 	
+	mensaje.setFont(*fuente);
+	mensaje.setCharacterSize(20);
+	mensaje.setFillColor(Color::Black);
+	mensaje.setString("Dijite la cantidad de vertices ");
+	mensaje.setPosition(Vector2f(71, 912));
 
 	evento = new Event;
 	gameloop();
@@ -32,6 +37,7 @@ void PantallaMapa::gameloop()
 {
 	grafo->iniciar(5);
 	PantallaPrincipal->draw(*basePantalla);
+	PantallaPrincipal->draw(mensaje);
 	PantallaPrincipal->display();
 
 	while (PantallaPrincipal->isOpen())
@@ -170,7 +176,6 @@ void PantallaMapa::ver()
 	Fuente.loadFromFile("fonts/PressStart2P-Regular.ttf");
 
 	circulo.setFillColor(sf::Color::Black);
-
 	int x;
 	int y;
 
