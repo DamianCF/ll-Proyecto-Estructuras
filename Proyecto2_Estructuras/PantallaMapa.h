@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 #include <iostream>
+#include <string>
 #include <locale> 
 #include "Grafo.h"
 
@@ -9,6 +10,7 @@ using namespace sf;
 using namespace std;
 
 #define Max_menu 5
+#define STRING(num) #num
 
 class PantallaMapa {
 private:

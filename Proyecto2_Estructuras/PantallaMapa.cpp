@@ -121,6 +121,7 @@ void PantallaMapa::ejecutarEventos()
 				//Dijkstra
 				if ((posicionM.x>1150 and posicionM.x <1400) and (posicionM.y>540 and posicionM.y<610)) {
 					cout << "Dijkstra"<<endl;
+					grafo->dijkstra(0, 4, 0);
 				}
 
 				//Warshall
@@ -162,6 +163,7 @@ void PantallaMapa::ver()
 	g = grafo->getRaiz();
 	sf::CircleShape circulo(20);
 	sf::Text etiq;
+	sf::Text peso;
 	sf::Font Fuente;
 
 	
@@ -184,12 +186,23 @@ void PantallaMapa::ver()
 			xx = g->getSigNodo()->getCoorx();
 			yy = g->getSigNodo()->getCoory();
 			
+			int p = g->getAristaADY()->getPeso();
+
+			//string num_cstr(STRING(p));
+			string num_str1(std::to_string(p));
+
+			peso.setString(num_str1);
+			peso.setFont(Fuente);
+			peso.setCharacterSize(15);
+			peso.setPosition(Vector2f((x+xx)/2,((y+yy)/2)+10));
+			PantallaPrincipal->draw(peso);
+
 			//prueba para crear una linea
 			sf::Vertex line[] =
 			{
 				sf::Vertex(sf::Vector2f(x, y)),
 				sf::Vertex(sf::Vector2f(xx, yy))
-			}; PantallaPrincipal->draw(line, 20, sf::Lines);
+			}; PantallaPrincipal->draw(line, 2, sf::Lines);
 		}
 		
 		circulo.setPosition(x - 15 ,y - 15 );

@@ -9,6 +9,8 @@ private:
 	char* letra;
 	int** mat;
 	int** let;
+	int* lista;
+	int* listamayor;
 
 	char nombreNodo;
 
@@ -20,6 +22,10 @@ private:
 
 	int coordenadax;
 	int coordenaday;
+
+	int suma;
+	int contp;
+	int cont;
 
 	int peso;
 
@@ -36,6 +42,10 @@ public:
 	void mostrarGrafo();
 	void insertarArista();
 	void insertarArista(Grafo*, Grafo*);
+	void recorrido(int, int , int);
+	void insertar(int);
+	int saca();
+	void dijkstra(int, int, int);
 
 	/*void vaciarAristas(Grafo&);
 	void eliminarNodo();

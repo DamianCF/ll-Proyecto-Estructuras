@@ -20,6 +20,9 @@ Grafo::Grafo() {
    peso = 0;
    coordenadax = 0;
    coordenaday = 0;
+   suma = 999;
+   contp = 0;
+   cont = 0;
    raiz = NULL;
 
    letra = new char[10];
@@ -42,6 +45,10 @@ void Grafo::iniciar(int t) {
     let = new int* [t];
 
     mat = new int* [t];
+
+    lista = new int [t];
+
+    listamayor = new int[t];
 
     for (int i = 0; i < t; i++) {  // Inicializa la matriz de adyacencia
         mat[i] = new int[t];
@@ -504,6 +511,74 @@ void Grafo::mostrarGrafo(){
         cout << endl;
     }
 }
+
+void Grafo::insertar(int x)
+{
+    lista[contp] = x;
+    contp++;
+}
+
+int Grafo::saca()
+{
+    int aux;
+    contp--;
+    aux = lista[contp];
+    lista[contp] = NULL;
+
+    return aux;
+}
+
+void Grafo::recorrido(int ini, int fin, int x)
+{
+    bool band = false;
+    for (int i = 0; i < contp; i++) {
+        if (ini == lista[i]) {
+            band = true;
+        }
+    }
+    insertar(ini);
+    if (!band) {
+        if (ini == fin) {
+
+            if (x < suma) {
+                suma = x;
+                for (int i = 0; i < 5; i++) {
+                    listamayor[i] = -1;
+                }
+                //cout<<endl;
+                for (int i = 0; i < contp; i++) {
+                    listamayor[i] = lista[i];
+                    //cout<<letra[listamayor[i]];
+                    //cout<<listamayor[i];
+                }
+                //cout<<suma;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 5; i++) {
+                if (mat[ini][i] > 0) {
+                    recorrido(i, fin, x + mat[ini][i]);
+                }
+            }
+        }
+    }
+    saca();
+}
+
+
+void Grafo::dijkstra(int ini, int fin, int x) {
+    recorrido(ini, fin, x);
+    cout << endl << listamayor[1] << endl;
+    for (int i = 0; i < 5; i++) {
+        if (listamayor[i] >= 0) {
+            cout << letra[listamayor[i]]<<"->";
+        }
+    }
+    cout << endl;
+    cout << "Peso: " << suma << endl;
+}
+
 
 //--------------------------sets y gets-----------------------------------------
 void Grafo::setNombreNodo(char nombre) {
