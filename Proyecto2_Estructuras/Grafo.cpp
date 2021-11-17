@@ -1,5 +1,16 @@
 #include"Grafo.h"
 
+/*Grafo::Grafo()
+{
+    nombreNodo = 65;
+    siguienteNodo = NULL;
+    nodoDestino = NULL;
+    aristaADY = NULL;
+    aristaSIG = NULL;
+    peso = 0;
+    raiz = NULL;
+}*/
+
 Grafo::Grafo() {
    nombreNodo=65;
    siguienteNodo = NULL;
@@ -8,13 +19,60 @@ Grafo::Grafo() {
    aristaSIG = NULL;
    peso = 0;
    raiz = NULL;
+
+   letra = new char[10];
+   letra[0] = 'A';
+   letra[1] = 'B';
+   letra[2] = 'C';
+   letra[3] = 'D';
+   letra[4] = 'E';
+   letra[5] = 'F';
+   letra[6] = 'G';
+   letra[7] = 'H';
+   letra[8] = 'I';
+   letra[9] = 'J';
+
 }
 
-Grafo::Grafo(char nombreNodo) {
-    this->nombreNodo=nombreNodo;
-}
 
-void Grafo::inicio() {
+void Grafo::inicio(int t) {
+
+   
+    let = new int*[t];
+    
+    mat = new int* [t];
+
+    for (int i = 0; i < t; i++) {  // Inicializa la matriz de adyacencia
+        mat[i] = new int[t];
+    }
+
+    for (int i = 0; i < t; i++) { // Inicializa la matriz de recorrido
+        let[i] = new int[t];
+    }
+
+    for (int i = 0; i < t; i++) {  // Llena la matriz de adyacencia con el valor de INT_MIN
+        for (int j = 0; j < t; j++) {
+            mat[i][j] = INT_MIN;
+        }
+    }
+
+    for (int i = 0; i < t; i++) {  // Llena la matriz de recorrido con el valor de su columna
+        for (int j = 0; j < t; j++) {
+            let[i][j] = j;
+        }
+    }
+
+    for (int i = 0; i < t; i++) { //imprime la letra de la columna
+
+        for (int j = 0; j < t; j++) {
+            cout.width(10);
+            cout << letra[let[i][j]];
+        }
+        cout << endl;
+    }
+    cout << endl;
+    cout << "  ";
+    
     //p = NULL;
     int opcion;     // opcion del menu
 
@@ -26,13 +84,13 @@ void Grafo::inicio() {
         case 1:
             insertarNodo(getRaiz());
             break;
-        case 2: insertarArista();
+        case 2: insertarArista(mat);
             break;
         /*case 3: eliminar_nodo();
             break;
         case 4: eliminar_arista();
             break;*/
-        case 5: mostrarGrafo();
+        case 5: mostrarGrafo(mat);
             break;
        /* case 6: mostrar_aristas();
             break;*/
@@ -112,9 +170,9 @@ void Grafo::agregaArista(Grafo*& aux, Grafo*& aux2, int peso, Grafo*& nuevo)
 
 }
 
-void Grafo::insertarArista(){
+void Grafo::insertarArista(int** mat){
     char ini, fin;
-    int peso;
+    int peso,i=0,j=0;
 
     Grafo* nuevo = new Grafo();
     Grafo* aux,* aux2;
@@ -133,6 +191,89 @@ void Grafo::insertarArista(){
     cin >> fin;
     cout << "PESO" << endl;
     cin >> peso;
+
+    if (ini == 'A')
+    {
+        i = 0;
+    }
+    else
+    {
+        if (ini == 'B')
+        {
+            i = 1;
+        }
+        else
+        {
+            if (ini == 'C')
+            {
+                i = 2;
+            }
+            else
+            {
+                if (ini == 'D')
+                {
+                    i = 3;
+                }
+                else
+                {
+                    if (ini == 'E')
+                    {
+                        i = 4;
+                    }
+                    else
+                    {
+                        if (ini == 'F')
+                        {
+                            i = 5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (fin == 'A')
+    {
+        j = 0;
+    }
+    else
+    {
+        if (fin == 'B')
+        {
+            j = 1;
+        }
+        else
+        {
+            if (fin == 'C')
+            {
+                j = 2;
+            }
+            else
+            {
+                if (fin == 'D')
+                {
+                    j = 3;
+                }
+                else
+                {
+                    if (fin == 'E')
+                    {
+                        j = 4;
+                    }
+                    else
+                    {
+                        if (fin == 'F')
+                        {
+                            j = 5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    mat[i][j] = peso;
+
     aux = getRaiz();
     aux2 = getRaiz();
     while (aux2 != NULL)
@@ -156,7 +297,38 @@ void Grafo::insertarArista(){
     }
 }
 
-void Grafo::mostrarGrafo(){
+void Grafo::mostrarGrafo(int** mat){
+
+    cout << endl;
+    cout << "  ";
+    for (int i = 0; i < 5; i++) {
+        cout.width(10);
+        cout << letra[i];
+    }
+    cout << endl;
+    for (int i = 0; i < 5; i++) {
+
+        for (int j = 0; j < 5; j++) {
+            cout.width(10);
+            if (j == 0)
+            {
+                cout.width(10);
+                cout << letra[i] << " ";
+            }
+            if (mat[i][j] == INT_MAX)
+            {
+                cout << 0;
+            }
+            else
+                if (mat[i][j] == INT_MIN)
+                {
+                    cout << -1;
+                }
+                else
+                    cout << mat[i][j];
+        }
+        cout << endl;
+    }
 
     Grafo* auxNodo;
     Grafo* auxArista;

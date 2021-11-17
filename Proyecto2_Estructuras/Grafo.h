@@ -6,6 +6,10 @@ class Grafo {
 
 private:
 
+	char* letra;
+	int** mat;
+	int** let;
+
 	char nombreNodo;
 
 	Grafo* siguienteNodo;
@@ -18,13 +22,13 @@ private:
 
 public:
 	Grafo();
-	Grafo(char);
-	void inicio();
+	Grafo(int);
+	void inicio(int);
 	void menu();
 	void insertarNodo(Grafo*);
 	void agregaArista(Grafo*&, Grafo*&,int, Grafo*&);
-	void mostrarGrafo();
-	void insertarArista();
+	void mostrarGrafo(int**);
+	void insertarArista(int**);
 	/*void vaciarAristas(Grafo&);
 	void eliminarNodo();
 	void eliminarArista();
