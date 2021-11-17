@@ -17,6 +17,7 @@ private:
 	Grafo* aristaADY;
 	Grafo* aristaSIG;
 
+
 	int coordenadax;
 	int coordenaday;
 

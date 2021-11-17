@@ -101,16 +101,7 @@ void PantallaMapa::ejecutarEventos()
 
 					
 					grafo->insertarNodo(posicionM.x, posicionM.y);
-					//circulo.setPosition((posicionM.x) - 15, (posicionM.y) - 15);
-					//PantallaPrincipal->draw(circulo);
 					ver();
-					
-					//prueba para crear una linea
-					sf::Vertex line[] =
-					{
-						sf::Vertex(sf::Vector2f(10, 10)),
-						sf::Vertex(sf::Vector2f(posicionM.x, posicionM.y))
-					}; PantallaPrincipal->draw(line, 2, sf::Lines);
 
 				PantallaPrincipal->display();//mostramos los cambios del evento
 			}
@@ -170,17 +161,46 @@ void PantallaMapa::ver()
 {
 	g = grafo->getRaiz();
 	sf::CircleShape circulo(20);
+	sf::Text etiq;
+	sf::Font Fuente;
+
+	
+	Fuente.loadFromFile("fonts/PressStart2P-Regular.ttf");
+
 	circulo.setFillColor(sf::Color::Black);
 
 	int x;
 	int y;
 
+	int xx;
+	int yy;
+
 	while (g != NULL)
 	{
 		x = g->getCoorx();
 		y = g->getCoory();
+
+		if (g->getSigNodo() != NULL) {
+			xx = g->getSigNodo()->getCoorx();
+			yy = g->getSigNodo()->getCoory();
+			
+			//prueba para crear una linea
+			sf::Vertex line[] =
+			{
+				sf::Vertex(sf::Vector2f(x, y)),
+				sf::Vertex(sf::Vector2f(xx, yy))
+			}; PantallaPrincipal->draw(line, 20, sf::Lines);
+		}
+		
 		circulo.setPosition(x - 15 ,y - 15 );
 		PantallaPrincipal->draw(circulo);
+		
+		etiq.setString(g->getNombreNodo());
+		etiq.setFont(Fuente);
+		etiq.setCharacterSize(15);
+		etiq.setPosition(Vector2f(x-1, y-2));
+		PantallaPrincipal->draw(etiq);
+
 		g = g->getSigNodo();
 	}
 }
